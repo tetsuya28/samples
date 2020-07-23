@@ -1,0 +1,27 @@
+service: service_name
+
+provider:
+  name: aws
+  runtime: go1.x
+  memorySize: 128
+
+  profile: default
+  region: ap-northeast-1
+
+custom:
+  environment:
+    prod: ${file(env/prod.yml)}
+    stg: ${file(env/stg.yml)}
+
+package:
+  exclude:
+    - ./**
+  include:
+    - ./bin/**
+
+functions:
+  function_name:
+    events:
+      - schedule: cron(0 0 * * ? *)
+    handler: bin/main
+    environment: ${self:custom.environment.${self:provider.stage}}
