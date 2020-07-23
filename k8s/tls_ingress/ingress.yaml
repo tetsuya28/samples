@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    networking.gke.io/managed-certificates: gcp-ingress-certificate
+    kubernetes.io/ingress.global-static-ip-name: <static_ip_name>
+  name: gcp-ingress
+  namespace: default
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: <service_name>
+              servicePort: <service_port>
+status:
+  loadBalancer:
+    ingress:
+      - ip: <static_ip_address>
