@@ -1,0 +1,95 @@
+{
+    "taskDefinition": {
+        "taskDefinitionArn": "XXXXXXXXXXXX<TASK_ARN>XXXXXXXXXXXX",
+        "containerDefinitions": [
+            {
+                "name": "nginx",
+                "image": "XXXXXXXXXXXX<NGINX_CONTAINER_IMAGE_URL>XXXXXXXXXXXX",
+                "cpu": 0,
+                "portMappings": [],
+                "essential": true,
+                "environment": [],
+                "volumesFrom": [],
+                "logConfiguration": {
+                    "logDriver": "awsfirelens",
+                    "options": {
+                        "delivery_stream": "XXXXXXXXXXXX<FIREHOSE_DELIVERY_NAME>XXXXXXXXXXXX",
+                        "region": "ap-northeast-1",
+                        "Name": "firehose"
+                    }
+                }
+            },
+            {
+                "name": "fluent-bit",
+                "image": "906394416424.dkr.ecr.ap-northeast-1.amazonaws.com/aws-for-fluent-bit:latest",
+                "cpu": 0,
+                "portMappings": [],
+                "essential": true,
+                "volumesFrom": [],
+                "user": "0",
+                "logConfiguration": {
+                    "logDriver": "awslogs",
+                    "options": {
+                        "awslogs-group": "XXXXXXXXXXXX<LOG_GROUP_NAME>XXXXXXXXXXXX",
+                        "awslogs-region": "ap-northeast-1",
+                        "awslogs-stream-prefix": "XXXXXXXXXXXX<LOG_STREAM_PREFIX>XXXXXXXXXXXX"
+                    }
+                }
+            }
+        ],
+        "family": "XXXXXXXXXXXX<ECS_SERVICE_FAMILY>XXXXXXXXXXXX",
+        "taskRoleArn": "XXXXXXXXXXXX<TASK_ROLE_ARN>XXXXXXXXXXXX",
+        "executionRoleArn": "XXXXXXXXXXXX<TASK_EXECUTION_ROLE_ARN>XXXXXXXXXXXX",
+        "networkMode": "awsvpc",
+        "revision": 1,
+        "status": "ACTIVE",
+        "requiresAttributes": [
+            {
+                "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+            },
+            {
+                "name": "ecs.capability.execution-role-awslogs"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.ecr-auth"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+            },
+            {
+                "name": "ecs.capability.firelens.fluentbit"
+            },
+            {
+                "name": "ecs.capability.firelens.options.config.file"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.docker-remote-api.1.17"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.logging-driver.awsfirelens"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.task-iam-role"
+            },
+            {
+                "name": "ecs.capability.execution-role-ecr-pull"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+            },
+            {
+                "name": "ecs.capability.task-eni"
+            }
+        ],
+        "placementConstraints": [],
+        "compatibilities": [
+            "EC2",
+            "FARGATE"
+        ],
+        "requiresCompatibilities": [
+            "FARGATE"
+        ],
+        "cpu": "256",
+        "memory": "512"
+    }
+}
