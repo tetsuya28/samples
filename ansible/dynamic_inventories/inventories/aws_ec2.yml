@@ -1,0 +1,6 @@
+plugin: aws_ec2
+regions:
+  - ap-northeast-1
+filters:
+  tag:Name: <instance_tag_name>
+
