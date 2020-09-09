@@ -1,0 +1,36 @@
+service: sample
+
+provider:
+  name: aws
+  runtime: go1.x
+  memorySize: 128
+
+  stage: ${opt:stage, 'dev'}
+  profile: default
+  region: ap-northeast-1
+
+plugins:
+  - serverless-plugin-canary-deployments
+
+custom:
+  environment:
+    dev: ${file(env/dev.yml)}
+
+package:
+ exclude:
+   - ./**
+ include:
+   - ./bin/**
+
+functions:
+  api:
+    handler: bin/main
+    environment: ${self:custom.environment.${self:provider.stage}}
+    events:
+      - http:
+          path: /
+          method: GET
+    deploymentSettings:
+      type: Linear10PercentEvery1Minute
+      alias: Live
+
