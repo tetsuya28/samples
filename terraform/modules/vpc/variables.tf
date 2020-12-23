@@ -11,7 +11,7 @@ variable vpc_cidr {
 }
 
 variable "subnet_count" {
-  type = int
+  type = number
 }
 
 variable "nat" {
