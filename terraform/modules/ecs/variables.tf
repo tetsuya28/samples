@@ -31,4 +31,3 @@ variable "service_desired_count" {
   default = 1
 }
 variable "task_role_policy" {}
-variable "task_exec_role_policy" {}

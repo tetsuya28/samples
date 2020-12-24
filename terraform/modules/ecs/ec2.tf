@@ -47,6 +47,10 @@ data "aws_iam_policy" "this" {
   arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 }
 
+data "aws_iam_policy" "ecr" {
+  arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+}
+
 data "aws_iam_policy_document" "ecs" {
   source_json = data.aws_iam_policy.this.policy
 }
@@ -84,4 +88,9 @@ resource "aws_iam_policy" "this" {
   name   = "${var.app}EC2ForECSPolicy"
   path   = "/"
   policy = data.aws_iam_policy_document.ecs.json
+}
+
+resource "aws_iam_role_policy_attachment" "ecr" {
+  role       = aws_iam_role.this.name
+  policy_arn = data.aws_iam_policy.ecr.arn
 }
