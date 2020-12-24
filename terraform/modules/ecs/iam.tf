@@ -1,13 +1,13 @@
 # Task role
 resource "aws_iam_role_policy" "task" {
-  name = "${var.name}_task_role_policy"
-  role = aws_iam_role.task.id
-  policy =var.task_role_policy
+  count  = var.task_role_policy == "" ? 0 : 1
+  name   = "${var.app}ECSTask"
+  role   = aws_iam_role.task.id
+  policy = var.task_role_policy
 }
 
 resource "aws_iam_role" "task" {
-  name = "${var.name}_task_role"
-
+  name               = "${var.app}ECSTask"
   assume_role_policy = <<-EOF
   {
     "Version": "2012-10-17",
@@ -23,23 +23,28 @@ resource "aws_iam_role" "task" {
     ]
   }
   EOF
+  tags = {
+    Name      = var.app
+    CreatedBy = var.created_by
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "task" {
+  count      = var.task_role_policy == "" ? 0 : 1
   role       = aws_iam_role.task.name
-  policy_arn = aws_iam_policy.task.arn
+  policy_arn = aws_iam_role_policy.task[count.index].id
 }
 
 # Task execution role
 resource "aws_iam_role_policy" "task_exec" {
-  name = "${var.name}_task_exec_role_policy"
-  role = aws_iam_role.task_exec.id
-  policy =var.task_exec_role_policy
+  count  = var.task_exec_role_policy == "" ? 0 : 1
+  name   = "${var.app}ECSTaskExec"
+  role   = aws_iam_role.task_exec.id
+  policy = var.task_exec_role_policy
 }
 
 resource "aws_iam_role" "task_exec" {
-  name = "${var.name}_task_exec_role"
-
+  name               = "${var.app}ECSTaskExec"
   assume_role_policy = <<-EOF
   {
     "Version": "2012-10-17",
@@ -55,9 +60,14 @@ resource "aws_iam_role" "task_exec" {
     ]
   }
   EOF
+  tags = {
+    Name      = var.app
+    CreatedBy = var.created_by
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "task_exec" {
+  count      = var.task_exec_role_policy == "" ? 0 : 1
   role       = aws_iam_role.task_exec.name
-  policy_arn = aws_iam_policy.task_exec.arn
+  policy_arn = aws_iam_role_policy.task_exec[count.index].id
 }
