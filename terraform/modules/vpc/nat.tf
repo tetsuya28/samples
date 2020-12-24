@@ -1,7 +1,7 @@
 resource "aws_eip" "this" {
   vpc = true
   tags = {
-    Name      = var.app
+    Name      = "${var.app}-nat"
     CreatedBy = var.created_by
   }
 }
