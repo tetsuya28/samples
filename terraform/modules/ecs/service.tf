@@ -26,11 +26,3 @@ resource "aws_ecs_service" "this" {
     CreatedBy = var.created_by
   }
 }
-
-resource "aws_cloudwatch_log_group" "this" {
-  name = "${var.app}/ecs"
-  tags = {
-    Name      = var.app
-    CreatedBy = var.created_by
-  }
-}
