@@ -24,4 +24,3 @@ variable "instance_count" {
 }
 variable "database_name" {}
 variable "master_username" {}
-variable "master_password" {}

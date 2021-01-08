@@ -20,7 +20,7 @@ resource "aws_rds_cluster" "this" {
   engine_version         = var.engine_version
   database_name          = var.database_name
   master_username        = var.master_username
-  master_password        = var.master_password
+  master_password        = random_password.this.result
   db_subnet_group_name   = aws_db_subnet_group.this.id
   vpc_security_group_ids = [aws_security_group.this.id]
   tags = {

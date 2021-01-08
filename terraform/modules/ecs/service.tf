@@ -9,6 +9,7 @@ resource "aws_ecs_task_definition" "this" {
   family                   = var.app
   container_definitions    = var.container_def
   task_role_arn            = aws_iam_role.task.arn
+  execution_role_arn       = aws_iam_role.task_exec.arn
   requires_compatibilities = ["EC2"]
   tags = {
     Name      = var.app
