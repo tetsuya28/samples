@@ -6,7 +6,7 @@ variable "created_by" {
   description = "tag description for resources made by terraform"
 }
 
-variable vpc_cidr {
+variable "vpc_cidr" {
   default = "172.16.0.0/16"
 }
 
