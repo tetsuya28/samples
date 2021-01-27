@@ -22,7 +22,7 @@ resource "aws_security_group" "this" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name      = var.app
+    Name      = "${var.app}-alb"
     CreatedBy = var.created_by
   }
 }

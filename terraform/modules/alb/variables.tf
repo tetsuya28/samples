@@ -13,3 +13,5 @@ variable "elb_account_id" {
   description = "Account ID for ELB managed by AWS"
   default     = "582318560864"
 }
+
+variable "target_group_port" {}
