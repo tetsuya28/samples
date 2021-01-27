@@ -15,6 +15,7 @@ variable "source_sg_ids" {
 
 variable "engine" {}
 variable "engine_version" {}
+variable "family" {}
 variable "instance_type" {
   # https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html
   default = "db.t3.small"
@@ -24,3 +25,7 @@ variable "instance_count" {
 }
 variable "database_name" {}
 variable "master_username" {}
+
+variable "rds_params" {
+  type = map(string)
+}
