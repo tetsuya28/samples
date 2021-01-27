@@ -20,8 +20,13 @@ resource "aws_ecs_task_definition" "this" {
 resource "aws_ecs_service" "this" {
   name            = var.app
   cluster         = var.app
-  task_definition = "${aws_ecs_task_definition.this.family}:${max("${data.aws_ecs_task_definition.this.revision}", "${aws_ecs_task_definition.this.revision}")}"
+  task_definition = "${aws_ecs_task_definition.this.family}:${max(data.aws_ecs_task_definition.this.revision, aws_ecs_task_definition.this.revision)}"
   desired_count   = var.service_desired_count
+  load_balancer {
+    target_group_arn = var.target_group_arn
+    container_name   = var.container_name
+    container_port   = var.container_port
+  }
   tags = {
     Name      = var.app
     CreatedBy = var.created_by

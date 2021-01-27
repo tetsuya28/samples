@@ -6,7 +6,7 @@ resource "aws_launch_configuration" "this" {
   name                        = "${var.app}-ecs"
   image_id                    = data.aws_ssm_parameter.ami_id.value
   instance_type               = var.instance_type
-  security_groups             = var.security_group_ids
+  security_groups             = [aws_security_group.this.id]
   enable_monitoring           = true
   iam_instance_profile        = aws_iam_instance_profile.this.name
   user_data                   = <<EOF
