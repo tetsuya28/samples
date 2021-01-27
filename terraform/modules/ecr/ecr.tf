@@ -9,3 +9,4 @@ resource "aws_ecr_repository" "this" {
     CreatedBy = var.created_by
   }
 }
+
