@@ -12,5 +12,5 @@ resource "aws_ssm_parameter" "this" {
 resource "random_password" "this" {
   length           = 16
   special          = true
-  override_special = "!#$%^&*()-_=+[]{}<>:?"
+  override_special = "!*-_=+"
 }
