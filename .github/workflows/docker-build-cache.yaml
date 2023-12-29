@@ -32,14 +32,10 @@ jobs:
             type=semver,pattern={{raw}}
             type=sha,format=short
 
-      - name: Run
-        run: |
-          pwd
-          ls -la
-
       - name: Build
         uses: docker/build-push-action@v5
         with:
+          context: github-actions/docker-build-cache
           file: Dockerfile
           push: false
           tags: ${{ steps.metadata.outputs.tags }}
