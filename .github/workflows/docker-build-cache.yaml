@@ -32,6 +32,11 @@ jobs:
             type=semver,pattern={{raw}}
             type=sha,format=short
 
+      - name: Run
+        run: |
+          pwd
+          ls -la
+
       - name: Build
         uses: docker/build-push-action@v5
         with:
