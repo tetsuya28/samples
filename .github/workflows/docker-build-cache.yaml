@@ -36,7 +36,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: github-actions/docker-build-cache
-          file: Dockerfile
           push: false
           tags: ${{ steps.metadata.outputs.tags }}
           cache-from: type=gha
