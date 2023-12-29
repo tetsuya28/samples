@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - add-docker-build-cache
     paths:
       - .github/workflows/docker-build-cache.yaml
       - github-actions/docker-build-cache/**
