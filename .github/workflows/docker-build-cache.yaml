@@ -1,0 +1,42 @@
+name: docker-build-cache
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/docker-build-cache.yaml
+      - github-actions/docker-build-cache/**
+
+defaults:
+  run:
+    working-directory: github-actions/docker-build-cache
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Set metadata
+        id: metadata
+        uses: docker/metadata-action@v5
+        with:
+          images: asia-northeast1-docker.pkg.dev
+          tags: |
+            type=semver,pattern={{raw}} # tag を利用
+            type=sha,format=short       # sha を利用
+
+      - name: Build
+        uses: docker/build-push-action@v5
+        with:
+          context: github-actions/docker-build-cache
+          push: false
+          tags: ${{ steps.metadata.outputs.tags }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max # 全レイヤーキャッシュ
