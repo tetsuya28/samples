@@ -30,6 +30,8 @@ module "github_actions" {
   project             = var.project
   attribute_condition = "attribute.repository==\"tetsuya28/samples\""
   github_actions_roles = [
-    "roles/clouddeploy.operator",
+    "roles/clouddeploy.serviceAgent",
+    "roles/clouddeploy.releaser",
+    "roles/cloudbuild.serviceAgent", // storage.buckets.list
   ]
 }

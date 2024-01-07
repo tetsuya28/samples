@@ -13,4 +13,4 @@ kind: Target
 metadata:
   name: sample
 run:
-  location: projects/${PROJECT_ID}/locations/asia-northeast1
+  location: projects/tetsuya28-playground/locations/asia-northeast1
