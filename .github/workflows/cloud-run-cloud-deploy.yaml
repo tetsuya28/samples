@@ -27,3 +27,5 @@ jobs:
           name: sample
           delivery_pipeline: cloud-run-cloud-deploy
           region: asia-northeast1
+          images: |
+            nginx=nginx
