@@ -27,5 +27,6 @@ jobs:
           name: sample
           delivery_pipeline: cloud-run-cloud-deploy
           region: asia-northeast1
+          skaffold_file: gcp/cloud-run/scaffold.yaml
           images: |
             nginx=nginx
