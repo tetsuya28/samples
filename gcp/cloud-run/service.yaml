@@ -2,13 +2,29 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: sample
+  labels:
+    cloud.googleapis.com/location: asia-northeast1
 spec:
   template:
     metadata:
       annotations:
         autoscaling.knative.dev/maxScale: '1'
-        run.googleapis.com/execution-environment: gen2
+        run.googleapis.com/startup-cpu-boost: 'true'
     spec:
+      containerConcurrency: 80
       containers:
       - name: nginx
         image: nginx
+        ports:
+        - name: http1
+          containerPort: 80
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+        startupProbe:
+          timeoutSeconds: 240
+          periodSeconds: 240
+          failureThreshold: 1
+          tcpSocket:
+            port: 80
