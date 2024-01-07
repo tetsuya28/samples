@@ -1,0 +1,16 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+  name: cloud-run-cloud-deploy
+description: Cloud Run with Cloud Deploy
+serialPipeline:
+  stages:
+    - targetId: sample
+      profiles: [dev]
+---
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: sample
+run:
+  location: projects/${PROJECT_ID}/locations/asia-northeast1
