@@ -4,3 +4,8 @@ metadata:
   name: sample
 deploy:
   cloudrun: {}
+profiles:
+  - name: dev
+    manifests:
+      rawYaml:
+        - service.yaml
