@@ -31,4 +31,4 @@ jobs:
 
   deploy:
     needs: pipeline
-    uses: .github/workflows/cloud-run-cloud-deploy.yaml
+    uses: ./.github/workflows/cloud-run-cloud-deploy.yaml
