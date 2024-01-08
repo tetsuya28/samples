@@ -6,7 +6,7 @@ on:
       - add-cloud-run-cloud-deploy
     paths:
       - .github/workflows/cloud-run-cloud-deploy.yaml
-      - gcp/cloud-run
+      - gcp/cloud-run/**
       - '!gcp/cloud-run/cloud-deploy.yaml'
   workflow_call:
 
