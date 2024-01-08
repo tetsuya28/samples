@@ -33,5 +33,6 @@ module "github_actions" {
     "roles/clouddeploy.serviceAgent",
     "roles/clouddeploy.releaser",
     "roles/cloudbuild.serviceAgent", // storage.buckets.list
+    "roles/clouddeploy.operator", // clouddeploy.deliveryPipelines.update
   ]
 }
