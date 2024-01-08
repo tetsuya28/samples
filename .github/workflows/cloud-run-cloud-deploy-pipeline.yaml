@@ -5,6 +5,7 @@ on:
     branches:
       - add-cloud-run-cloud-deploy
     paths:
+      - .github/workflows/cloud-run-cloud-deploy-pipeline.yaml
       - gcp/cloud-run/cloud-deploy.yaml
 
 permissions:
