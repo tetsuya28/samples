@@ -12,7 +12,7 @@ permissions:
   id-token: write
 
 jobs:
-  deploy:
+  pipeline:
     runs-on: ubuntu-latest
     environment:
       name: main
@@ -30,4 +30,5 @@ jobs:
           gcloud deploy apply --file gcp/cloud-run/cloud-deploy.yaml --region asia-northeast1
 
   deploy:
+    needs: pipeline
     uses: .github/workflows/cloud-run-cloud-deploy.yaml
