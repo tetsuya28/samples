@@ -14,3 +14,4 @@ metadata:
   name: sample
 run:
   location: projects/tetsuya28-playground/locations/asia-northeast1
+requireApproval: true # デプロイの承認を必要とする
