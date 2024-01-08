@@ -29,4 +29,5 @@ jobs:
       - run: |
           gcloud deploy apply --file gcp/cloud-run/cloud-deploy.yaml --region asia-northeast1
 
-      - uses: .github/workflows/cloud-run-cloud-deploy.yaml
+  deploy:
+    uses: .github/workflows/cloud-run-cloud-deploy.yaml
