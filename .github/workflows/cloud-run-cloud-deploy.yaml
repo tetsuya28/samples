@@ -3,11 +3,12 @@ name: cloud-run-cloud-deploy
 on:
   push:
     branches:
-      - add-cloud-run-cloude-deploy
+      - add-cloud-run-cloud-deploy
     paths:
       - .github/workflows/cloud-run-cloud-deploy.yaml
       - gcp/cloud-run
-      - !gcp/cloud-run/cloud-deploy.yaml
+    paths-ignore:
+      - gcp/cloud-run/cloud-deploy.yaml
   workflow_call:
 
 permissions:
