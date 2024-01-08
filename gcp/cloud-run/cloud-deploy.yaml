@@ -7,6 +7,14 @@ serialPipeline:
   stages:
     - targetId: sample
       profiles: [dev]
+      strategy:
+        canary:
+          runtimeConfig:
+            cloudRun:
+              automaticTrafficContrl: true
+          canaryDeployment:
+            percentages: [5, 90]
+            verify: false
 ---
 apiVersion: deploy.cloud.google.com/v1
 kind: Target
