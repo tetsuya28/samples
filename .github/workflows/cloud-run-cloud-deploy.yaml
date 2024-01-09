@@ -14,7 +14,6 @@ on:
         description: "Release name prefix"
         required: true
         type: string
-        default: "deploy"
 
 permissions:
   contents: read
@@ -33,9 +32,14 @@ jobs:
           workload_identity_provider: "projects/${{ vars.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-actions/providers/github-actions"
           service_account: "github-actions@${{ vars.GCP_PROJECT_ID }}.iam.gserviceaccount.com"
 
+      - name: Set short git commit SHA
+        run: |
+          calculatedSha=$(git rev-parse --short ${{ github.sha }})
+          echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
+
       - uses: google-github-actions/create-cloud-deploy-release@v1
         with:
-          name: ${{ inputs.called_by }}-${{ github.sha }}
+          name: ${{ inputs.called_by || "deploy" }}-${{ env.COMMIT_SHORT_SHA }}
           delivery_pipeline: cloud-run-cloud-deploy
           region: asia-northeast1
           skaffold_file: gcp/cloud-run/scaffold.yaml
