@@ -33,6 +33,6 @@ jobs:
 
   deploy:
     needs: pipeline
-    uses: ./.github/workflows/cloud-run-cloud-deploy.yaml
+    uses: ./.github/workflows/reusable/cloud-run-cloud-deploy.yaml
     with:
       called_by: pipeline
