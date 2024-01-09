@@ -6,6 +6,7 @@ on:
       - add-cloud-run-cloude-deploy
     paths:
       - .github/workflows/cloud-run-cloud-deploy-pipeline.yaml
+      - .github/workflows/reusable/cloud-run-cloud-deploy.yaml
       - gcp/cloud-run/cloud-deploy.yaml
 
 permissions:
