@@ -3,12 +3,18 @@ name: cloud-run-cloud-deploy
 on:
   push:
     branches:
-      - main
+      - add-cloud-run-cloude-deploy
     paths:
       - .github/workflows/cloud-run-cloud-deploy.yaml
       - gcp/cloud-run/**
       - '!gcp/cloud-run/cloud-deploy.yaml'
   workflow_call:
+    inputs:
+      called_by:
+        description: "Release name prefix"
+        required: true
+        type: string
+        default: "deploy"
 
 permissions:
   contents: read
@@ -29,7 +35,7 @@ jobs:
 
       - uses: google-github-actions/create-cloud-deploy-release@v1
         with:
-          name: ${{ github.sha }}
+          name: ${{ inputs.called_by }}-${{ github.sha }}
           delivery_pipeline: cloud-run-cloud-deploy
           region: asia-northeast1
           skaffold_file: gcp/cloud-run/scaffold.yaml

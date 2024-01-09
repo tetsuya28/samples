@@ -3,7 +3,7 @@ name: cloud-run-cloud-deploy-pipeline
 on:
   push:
     branches:
-      - main
+      - add-cloud-run-cloude-deploy
     paths:
       - .github/workflows/cloud-run-cloud-deploy-pipeline.yaml
       - gcp/cloud-run/cloud-deploy.yaml
@@ -33,3 +33,5 @@ jobs:
   deploy:
     needs: pipeline
     uses: ./.github/workflows/cloud-run-cloud-deploy.yaml
+    with:
+      called_by: pipeline
