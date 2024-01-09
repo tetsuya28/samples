@@ -1,0 +1,25 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+  name: cloud-run-cloud-deploy
+description: Cloud Run with Cloud Deploy
+serialPipeline:
+  stages:
+    - targetId: sample
+      profiles: [dev]
+      strategy:
+        canary:
+          runtimeConfig:
+            cloudRun:
+              automaticTrafficControl: true
+          canaryDeployment:
+            percentages: [5, 90]
+            verify: false
+---
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: sample
+run:
+  location: projects/tetsuya28-playground/locations/asia-northeast1
+requireApproval: true # デプロイの承認を必要とする

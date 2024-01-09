@@ -1,0 +1,17 @@
+name: cloud-run-cloud-deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/cloud-run-cloud-deploy.yaml
+      - .github/workflows/reusable-cloud-run-cloud-deploy-pipeline.yaml
+      - gcp/cloud-run/**
+      - '!gcp/cloud-run/cloud-deploy.yaml'
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/reusable-cloud-run-cloud-deploy.yaml
+    with:
+      called_by: deploy
